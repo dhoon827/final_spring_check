@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+		<typeAliases>
+			<typeAlias alias="member" type="com.icia.memberboard.dto.MemberDTO"/>
+			<typeAlias alias="board" type="com.icia.memberboard.dto.BoardDTO"/>
+			<typeAlias alias="page" type="com.icia.memberboard.dto.PageDTO"/>
+			<typeAlias alias="comment" type="com.icia.memberboard.dto.CommentDTO"/>
+		</typeAliases>
+</configuration>

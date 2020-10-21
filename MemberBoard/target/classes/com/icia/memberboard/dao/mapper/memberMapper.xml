@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="Member"> 
+	
+	<!-- 아이디 중복확인 -->
+	<select id="idChk" parameterType="String" resultType="String">
+		SELECT * FROM MEMBER WHERE MID=#{mid}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="memberJoin" parameterType="member">
+		INSERT INTO MEMBER(MID,MPASSWORD,MNAME,MPHONE,MBIRTH,MEMAIL,MADDRESS,MFILENAME) VALUES
+			(#{mid},#{mpassword},#{mname},#{mphone},#{mbirth},#{memail},#{maddress},#{mfilename})	
+	</insert>	
+	<!-- 로그인 -->
+	<select id="memberLogin" parameterType="member" resultType="String">
+		SELECT MID FROM MEMBER WHERE MID=#{mid} AND MPASSWORD=#{mpassword}
+	</select>
+	<!-- 정보수정1 -->
+		<select id="memberMypage" parameterType="String" resultType="member">
+		SELECT * FROM MEMBER WHERE MID=#{mid}
+	</select>
+	<!-- 정보수정2 -->
+	<update id="memberUpdate" parameterType="member">
+		UPDATE MEMBER SET MNAME=#{mname},MPHONE=#{mphone},MBIRTH=#{mbirth}, MEMAIL=#{memail}, MADDRESS=#{maddress}, MFILENAME=#{mfilename} WHERE MID=#{mid}
+	</update>
+	<!-- 회원목록조회 -->
+	<select id="memberList" resultType="member">
+		SELECT * FROM MEMBER
+	</select>
+	<!-- 회원 상세조회 -->
+	<select id="memberView" parameterType="String" resultType="member">  <!-- 파라미터는 mid result는 한명을 대상으로 전체를 받아오는거라 member -->
+		SELECT * FROM MEMBER WHERE MID=#{mid}
+	</select>
+	<!-- 회원삭제 -->
+	<delete id="memberDelete" parameterType="String">
+		DELETE FROM MEMBER WHERE MID=#{mid}
+	</delete>
+	<!-- 카카오 아이디 -->
+	<insert id="kakaoMemberJoin" parameterType="member">
+		INSERT INTO MEMBER(MID,MPASSWORD,MNAME,MPHONE,MEMAIL,MBIRTH,KAKAOID) VALUES
+			(#{mid},#{mpassword},#{mname},#{mphone},#{memail},#{mbirth},#{kakaoId})	
+	</insert>	
+	<!-- 카카오로그인 -->
+	<select id="kakaoLogin" parameterType="String" resultType="String">
+		SELECT MID FROM MEMBER WHERE KAKAOID=#{kakaoId}
+	</select>
+	<!-- 네이버 아이디 -->
+	<insert id="naverMemberJoin" parameterType="member">
+		INSERT INTO MEMBER(MID,MPASSWORD,MNAME,MPHONE,MEMAIL,MBIRTH,NAVERID) VALUES
+			(#{mid},#{mpassword},#{mname},#{mphone},#{memail},#{mbirth},#{naverId})	
+	</insert>	
+	<!-- 네이버로그인 -->
+	<select id="naverLogin" parameterType="String" resultType="String">
+		SELECT MID FROM MEMBER WHERE NAVERID=#{naverId}
+	</select>
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

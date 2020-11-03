@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                 http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/security
+                                 http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	<!-- auto-config 속성은 자동 설정을 뜻하고 use-expressions 속성은 intercept-url에 SpEL문법의 
+		사용유무를 선택한다. -->
+	<http auto-config="true" use-expressions="false">
+	
+	<!-- - 11행: 모든 URL을 접속(/**)하기 위해선 ROLE_USER 권한이 필요하다 -->
+		<intercept-url pattern="/**" access="ROLE_USER" />
+	</http>
+
+	<authentication-manager> <!-- 인증 관련 정보 -->
+		<authentication-provider> <!-- 인증 정보제공자 지정 -->
+			<user-service> <!-- 사용자 정보 설정 -->
+				<user name="user" password="userPw" authorities="ROLE_USER" />
+				<user name="guest" password="guest" authorities="ROLE_GUEST" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>
